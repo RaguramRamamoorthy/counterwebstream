@@ -1,5 +1,5 @@
 # Import libraries
-from request import count
+from request import count, bnw
 import streamlit as st
 import numpy as np
 import cv2
@@ -71,11 +71,12 @@ if uploaded_file is not None:
         #     gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
         #     a = st.image(gray_scale, width=300)
         if filter == 'Black and White':
-            converted_img = np.array(image.convert('RGB'))
-            gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
+            # gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
             slider = st.sidebar.slider('Adjust the intensity', 1, 255, 127, step=1)
-            (thresh, blackAndWhiteImage) = cv2.threshold(gray_scale, slider, 255, cv2.THRESH_BINARY)
-            a = st.image(blackAndWhiteImage, width=300)
+            # (thresh, blackAndWhiteImage) = cv2.threshold(gray_scale, slider, 255, cv2.THRESH_BINARY)
+            blackAndWhiteImage = bnw(image, slider)
+            converted_img = np.array(blackAndWhiteImage.convert('RGB'))
+            a = st.image(converted_img, width=300)
         elif filter == 'Enhance Image':
             converted_img = np.array(image.convert('RGB'))
             # slider = st.sidebar.slider('Adjust the intensity', 5, 81, 33, step=2)
