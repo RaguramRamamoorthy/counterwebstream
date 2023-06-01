@@ -93,7 +93,7 @@ if uploaded_file is not None:
 
             image_with_count, num = count(image)
             converted_img = np.array(image_with_count.convert('RGB'))
-            image_cropped = crop_image(converted_img)
+            image_cropped = converted_img
 
             # # fetching the dimensions
             # widt, higt = image_cropped.size
